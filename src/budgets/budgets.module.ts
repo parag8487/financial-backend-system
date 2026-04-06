@@ -3,8 +3,8 @@ import { BudgetsService } from './budgets.service';
 import { BudgetsController } from './budgets.controller';
 
 @Module({
-    controllers: [BudgetsController],
-    providers: [BudgetsService],
-    exports: [BudgetsService],
+  controllers: [BudgetsController],
+  providers: [BudgetsService],
+  exports: [BudgetsService],
 })
-export class BudgetsModule { }
+export class BudgetsModule {}

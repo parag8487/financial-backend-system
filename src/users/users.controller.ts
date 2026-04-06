@@ -1,14 +1,19 @@
 import {
-    Controller,
-    Get,
-    Body,
-    Patch,
-    Param,
-    Delete,
-    UseGuards,
-    HttpStatus,
+  Controller,
+  Get,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  HttpStatus,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
 import { Role } from '@prisma/client';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/user.dto';
@@ -21,45 +26,54 @@ import { Roles } from '../common/decorators/roles.decorator';
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('users')
 export class UsersController {
-    constructor(private readonly usersService: UsersService) { }
+  constructor(private readonly usersService: UsersService) {}
 
-    @Get()
-    @Roles(Role.ADMIN)
-    @ApiOperation({ summary: 'Admin: List all users' })
-    @ApiResponse({ status: HttpStatus.OK, description: 'List of all users' })
-    @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Role insufficient' })
-    async findAll() {
-        const users = await this.usersService.findAll();
-        return { success: true, data: users };
-    }
+  @Get()
+  @Roles(Role.ADMIN)
+  @ApiOperation({ summary: 'Admin: List all users' })
+  @ApiResponse({ status: HttpStatus.OK, description: 'List of all users' })
+  @ApiResponse({
+    status: HttpStatus.FORBIDDEN,
+    description: 'Role insufficient',
+  })
+  async findAll() {
+    const users = await this.usersService.findAll();
+    return { success: true, data: users };
+  }
 
-    @Get(':id')
-    @Roles(Role.ADMIN)
-    @ApiOperation({ summary: 'Admin: Get specific user details' })
-    @ApiResponse({ status: HttpStatus.OK, description: 'User details' })
-    @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'User not found' })
-    async findOne(@Param('id') id: string) {
-        const user = await this.usersService.findOne(id);
-        return { success: true, data: user };
-    }
+  @Get(':id')
+  @Roles(Role.ADMIN)
+  @ApiOperation({ summary: 'Admin: Get specific user details' })
+  @ApiResponse({ status: HttpStatus.OK, description: 'User details' })
+  @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'User not found' })
+  async findOne(@Param('id') id: string) {
+    const user = await this.usersService.findOne(id);
+    return { success: true, data: user };
+  }
 
-    @Patch(':id')
-    @Roles(Role.ADMIN)
-    @ApiOperation({ summary: 'Admin: Update user role or status' })
-    @ApiResponse({ status: HttpStatus.OK, description: 'User updated successfully' })
-    @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'User not found' })
-    async update(@Param('id') id: string, @Body() dto: UpdateUserDto) {
-        const user = await this.usersService.update(id, dto);
-        return { success: true, data: user };
-    }
+  @Patch(':id')
+  @Roles(Role.ADMIN)
+  @ApiOperation({ summary: 'Admin: Update user role or status' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'User updated successfully',
+  })
+  @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'User not found' })
+  async update(@Param('id') id: string, @Body() dto: UpdateUserDto) {
+    const user = await this.usersService.update(id, dto);
+    return { success: true, data: user };
+  }
 
-    @Delete(':id')
-    @Roles(Role.ADMIN)
-    @ApiOperation({ summary: 'Admin: Remove user account' })
-    @ApiResponse({ status: HttpStatus.OK, description: 'User removed successfully' })
-    @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'User not found' })
-    async remove(@Param('id') id: string) {
-        await this.usersService.remove(id);
-        return { success: true, message: 'User deleted successfully' };
-    }
+  @Delete(':id')
+  @Roles(Role.ADMIN)
+  @ApiOperation({ summary: 'Admin: Remove user account' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'User removed successfully',
+  })
+  @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'User not found' })
+  async remove(@Param('id') id: string) {
+    await this.usersService.remove(id);
+    return { success: true, message: 'User deleted successfully' };
+  }
 }

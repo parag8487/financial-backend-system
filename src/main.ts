@@ -14,9 +14,9 @@ async function bootstrap() {
   // --- Global Validation ---
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true,       // strip unknown props
+      whitelist: true, // strip unknown props
       forbidNonWhitelisted: true,
-      transform: true,       // auto-transform query params to typed primitives
+      transform: true, // auto-transform query params to typed primitives
     }),
   );
 
