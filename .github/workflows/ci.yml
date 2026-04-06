@@ -32,7 +32,7 @@ jobs:
       run: npm run build
 
     - name: Initialize Test Database
-      run: npx prisma db push --skip-generate
+      run: npx prisma db push
       env:
         DATABASE_URL: "file:./test-e2e.db"
 
