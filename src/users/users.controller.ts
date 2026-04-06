@@ -1,6 +1,7 @@
 import {
   Controller,
   Get,
+  Post,
   Body,
   Patch,
   Param,
@@ -16,7 +17,7 @@ import {
 } from '@nestjs/swagger';
 import { Role } from '@prisma/client';
 import { UsersService } from './users.service';
-import { UpdateUserDto } from './dto/user.dto';
+import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { Roles } from '../common/decorators/roles.decorator';
@@ -26,7 +27,23 @@ import { Roles } from '../common/decorators/roles.decorator';
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) { }
+
+  @Post()
+  @Roles(Role.ADMIN)
+  @ApiOperation({ summary: 'Admin: Create a new user account' })
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description: 'User created successfully',
+  })
+  @ApiResponse({
+    status: HttpStatus.CONFLICT,
+    description: 'Email already in use',
+  })
+  async create(@Body() dto: CreateUserDto) {
+    const user = await this.usersService.create(dto);
+    return { success: true, data: user };
+  }
 
   @Get()
   @Roles(Role.ADMIN)

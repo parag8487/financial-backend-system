@@ -5,11 +5,35 @@ import {
 } from '@nestjs/common';
 import * as bcrypt from 'bcryptjs';
 import { PrismaService } from '../prisma/prisma.service';
-import { UpdateUserDto } from './dto/user.dto';
+import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
+
+  async create(dto: CreateUserDto) {
+    const existing = await this.prisma.user.findUnique({
+      where: { email: dto.email },
+    });
+    if (existing) throw new ConflictException('Email already in use');
+
+    const hashedPassword = await bcrypt.hash(dto.password, 10);
+
+    return this.prisma.user.create({
+      data: {
+        email: dto.email,
+        password: hashedPassword,
+        role: dto.role,
+      },
+      select: {
+        id: true,
+        email: true,
+        role: true,
+        status: true,
+        createdAt: true,
+      },
+    });
+  }
 
   async findAll() {
     return this.prisma.user.findMany({
