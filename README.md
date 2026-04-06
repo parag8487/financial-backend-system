@@ -1,38 +1,38 @@
-# 💰 Financial Records & RBAC Backend
+# Financial Records & RBAC Backend
 
 A professional, industrial-grade NestJS backend for financial data processing. This system implements hierarchical Role-Based Access Control (RBAC), comprehensive CRUD operations, and advanced dashboard analytics.
 
 ---
 
-## 🚀 Standout Industrial Features
+## Standout Industrial Features
 
-- **💎 Budgeting Engine**: Set and track category-wise monthly spending goals.
-- **📊 Interactive Dashboard**: Real-time **Utilization %** and **Remaining Balance** analytics.
-- **🛡️ Hierarchical RBAC**: Granular permission system (`ADMIN > ANALYST > VIEWER`) with ownership enforcement.
-- **🔍 Advanced Search**: Full-text searching across financial categories and descriptions.
-- **🧪 100% Verified**: Exhaustive test suite with **34 Unit Tests** and **10 E2E Integration Tests**.
-- **🐳 Dockerized**: Production-ready multi-stage Docker builds and orchestration with `docker-compose`.
-- **💓 Health Monitoring**: Real-time `/health` endpoint for database and memory status.
-- **✅ Strict Environment**: Joi-based schema validation prevents crashes from misconfiguration.
-- **📚 Platinum API Specs**: 100% field coverage with exhaustive metadata at `/api/docs`.
+- **Budgeting Engine**: Set and track category-wise monthly spending goals.
+- **Interactive Dashboard**: Real-time **Utilization %** and **Remaining Balance** analytics.
+- **Hierarchical RBAC**: Granular permission system (`ADMIN > ANALYST > VIEWER`) with ownership enforcement.
+- **Advanced Search**: Full-text searching across financial categories and descriptions.
+- **100% Verified**: Exhaustive test suite with **34 Unit Tests** and **10 E2E Integration Tests**.
+- **Dockerized**: Production-ready multi-stage Docker builds and orchestration with `docker-compose`.
+- **Health Monitoring**: Real-time `/health` endpoint for database and memory status.
+- **Strict Environment**: Joi-based schema validation prevents crashes from misconfiguration.
+- **Platinum API Specs**: 100% field coverage with exhaustive metadata at `/api/docs`.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Technology | Reason |
 |-------|------------|--------|
-| **Framework** | NestJS 11 | Industrial standard for scalable Node.js apps. |
-| **Language** | TypeScript 5 | Strict typing for end-to-end reliability. |
-| **ORM** | Prisma 7 | Type-safe database access with Driver Adapters. |
-| **Database** | SQLite | Zero-config local development (Prod-ready for Postgres). |
+| **Framework** | NestJS | Industrial standard for scalable Node.js apps. |
+| **Language** | TypeScript | Strict typing for end-to-end reliability. |
+| **ORM** | Prisma | Type-safe database access with Driver Adapters. |
+| **Database** | SQLite | Zero-config local development (Production-ready abstraction). |
 | **Auth** | Passport JWT | Industry-standard secure stateless authentication. |
 | **Integrity** | Joi | Fail-fast environment variable validation. |
 | **Observability**| Terminus | Standardized health checks. |
 
 ---
 
-### 🚦 Quick Start
+## Quick Start
 
 #### 📥 Downloading from GitHub
 If you have just cloned or downloaded this repository, follow these steps to run the application locally:
